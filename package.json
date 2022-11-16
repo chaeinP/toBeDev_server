@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --ignore-watch node_modules src/server.ts",
     "build": "tsc",
-    "serve": "tsc && node dist/server.js",
+    "serve": "pm2 start dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

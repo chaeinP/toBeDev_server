@@ -1,0 +1,47 @@
+name: remote ssh command for deploy
+on:
+  push:
+    branches:
+      - stage
+      - main
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  build-stg:
+    name: deploy-stg
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/stage' }}
+    steps:
+      - name: executing remote ssh commands using key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd toBeDev_server
+            git pull origin stage
+            npm run build
+            pm2 kill
+            npm run start
+
+  build:
+    name: deploy
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - name: executing remote ssh commands using key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd toBeDev_server
+            git pull origin stage
+            npm run build
+            pm2 kill
+            npm run start
