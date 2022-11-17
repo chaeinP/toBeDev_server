@@ -14,7 +14,7 @@
       "@controllers/*": ["./src/controllers/*"],
       "@config/*": ["./src/config/*"],
       "@libs/*": ["./src/libs/*"],
-      "@models/*": ["./src/models/*"],
+      "@entity/*": ["./src/entity/*"],
       "@routes/*": ["./src/routes/*"],
       "@types/*": ["./src/@types/*"]
     }
