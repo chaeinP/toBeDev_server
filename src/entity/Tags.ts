@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { BootCampDetailTagsMap } from './BootCampDetailTagsMap';
+import { BootCampDetailsTagsMap } from './BootCampDetailsTagsMap';
 
 @Entity({ name: 'tags' })
 export class Tags {
@@ -10,8 +10,8 @@ export class Tags {
   name: string;
 
   @OneToMany(
-    () => BootCampDetailTagsMap,
-    BootCampDetailTagsMap => BootCampDetailTagsMap.bootCampDetail,
+    () => BootCampDetailsTagsMap,
+    BootCampDetailsTagsMap => BootCampDetailsTagsMap.bootCampDetails,
   )
-  bootCampDetailTagsMap: BootCampDetailTagsMap[];
+  bootCampDetailsTagsMap: BootCampDetailsTagsMap[];
 }

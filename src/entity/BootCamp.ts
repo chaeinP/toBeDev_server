@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { BootCampBrand } from '@entity/BootCampBrand';
 import { BootCampSecondCategoryMap } from './BootCampSecondCategory';
-import { BootCampDetail } from './BootCampDetail';
+import { BootCampDetails } from './BootCampDetails';
 
 @Entity({ name: 'bootcamp' })
 export class BootCamp {
@@ -28,6 +28,6 @@ export class BootCamp {
   )
   bootCampSecondCategoryMap: BootCampSecondCategoryMap[];
 
-  @OneToMany(() => BootCampDetail, bootCampDetail => bootCampDetail.bootCamp)
-  bootCampDetail: BootCampDetail[];
+  @OneToMany(() => BootCampDetails, bootCampDetails => bootCampDetails.bootCamp)
+  bootCampDetails: BootCampDetails[];
 }

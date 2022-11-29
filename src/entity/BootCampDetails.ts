@@ -1,4 +1,4 @@
-import { BootCampDetailSkillsMap } from './BootCampDetailSkillsMap';
+import { BootCampDetailsSkillsMap } from './BootCampDetailsSkillsMap';
 import { BootCamp } from './BootCamp';
 import {
   Column,
@@ -8,7 +8,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { BootCampDetailTagsMap } from './BootCampDetailTagsMap';
+import { BootCampDetailsTagsMap } from './BootCampDetailsTagsMap';
 
 export enum IsOnline {
   offline,
@@ -22,8 +22,8 @@ export enum Status {
   '모집마감',
 }
 
-@Entity({ name: 'bootcamp_detail' })
-export class BootCampDetail {
+@Entity({ name: 'bootcamp_details' })
+export class BootCampDetails {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -90,19 +90,19 @@ export class BootCampDetail {
   @Column({ type: 'int' })
   period: number;
 
-  @ManyToOne(() => BootCamp, bootCamp => bootCamp.bootCampDetail)
+  @ManyToOne(() => BootCamp, bootCamp => bootCamp.bootCampDetails)
   @JoinColumn({ name: 'bootcamp_id' })
   bootCamp: BootCamp;
 
   @OneToMany(
-    () => BootCampDetailSkillsMap,
-    bootCampDetailSkillsMap => bootCampDetailSkillsMap.bootCampDetail,
+    () => BootCampDetailsSkillsMap,
+    bootCampDetailsSkillsMap => bootCampDetailsSkillsMap.bootCampDetails,
   )
-  bootCampDetailSkillsMap: BootCampDetailSkillsMap[];
+  bootCampDetailSkillsMap: BootCampDetailsSkillsMap[];
 
   @OneToMany(
-    () => BootCampDetailTagsMap,
-    bootCampDetailTagsMap => bootCampDetailTagsMap.bootCampDetail,
+    () => BootCampDetailsTagsMap,
+    bootCampDetailsTagsMap => bootCampDetailsTagsMap.bootCampDetails,
   )
-  bootCampDetailTagsMap: BootCampDetailTagsMap[];
+  bootCampDetailsTagsMap: BootCampDetailsTagsMap[];
 }

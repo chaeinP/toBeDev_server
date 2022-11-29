@@ -1,4 +1,4 @@
-import { BootCampDetailSkillsMap } from './BootCampDetailSkillsMap';
+import { BootCampDetailsSkillsMap } from './BootCampDetailsSkillsMap';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'skills' })
@@ -10,8 +10,8 @@ export class Skills {
   skill: string;
 
   @OneToMany(
-    () => BootCampDetailSkillsMap,
-    bootCampDetailSkillsMap => bootCampDetailSkillsMap.bootCampDetail,
+    () => BootCampDetailsSkillsMap,
+    bootCampDetailsSkillsMap => bootCampDetailsSkillsMap.bootCampDetails,
   )
-  bootCampDetailSkillsMap: BootCampDetailSkillsMap[];
+  bootCampDetailSkillsMap: BootCampDetailsSkillsMap[];
 }
