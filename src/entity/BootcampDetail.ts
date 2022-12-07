@@ -1,5 +1,5 @@
-import { BootCampDetailsSkillsMap } from './BootCampDetailsSkillsMap';
-import { BootCamp } from './BootCamp';
+import { BootcampDetailSkillMap } from './BootcampDetailSkillMap';
+import { Bootcamp } from './Bootcamp';
 import {
   Column,
   Entity,
@@ -8,7 +8,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { BootCampDetailsTagsMap } from './BootCampDetailsTagsMap';
+import { BootcampDetailTagMap } from './BootcampDetailTagMap';
 
 export enum IsOnline {
   offline,
@@ -22,13 +22,16 @@ export enum Status {
   '모집마감',
 }
 
-@Entity({ name: 'bootcamp_details' })
-export class BootCampDetails {
+@Entity({ name: 'Bootcamp_details' })
+export class BootcampDetail {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ name: 'product_title', type: 'varchar', length: 255 })
   productTitle: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  description: string;
 
   @Column({ name: 'origin_url', type: 'varchar', length: 255 })
   originUrl: string;
@@ -42,10 +45,7 @@ export class BootCampDetails {
   @Column({ name: 'study_time', type: 'varchar', length: 255 })
   studyTime: string;
 
-  @Column({ name: 'study_time_detail', type: 'varchar', length: 255 })
-  studyTimeDetail: string;
-
-  @Column({ name: 'n_days_a_week', type: 'int' })
+  @Column({ name: 'ndays_a_week', type: 'int' })
   nDaysAWeek: number;
 
   @Column({ name: 'quota', type: 'int' })
@@ -66,11 +66,14 @@ export class BootCampDetails {
   @Column({ name: 'views', type: 'int' })
   views: number;
 
-  @Column({ name: 'thumbnail', type: 'varchar', length: 255 })
-  thumbnail: string;
+  @Column({ name: 'thumbnail_url', type: 'varchar', length: 255 })
+  thumbnailUrl: string;
 
-  @Column({ name: 'contents', type: 'text' })
-  contents: string;
+  @Column({ name: 'ci_url', type: 'varchar', length: 255 })
+  ciUrl: string;
+
+  @Column({ name: 'content', type: 'text' })
+  content: string;
 
   @Column({ type: 'text' })
   curriculumn: string;
@@ -90,19 +93,19 @@ export class BootCampDetails {
   @Column({ type: 'int' })
   period: number;
 
-  @ManyToOne(() => BootCamp, bootCamp => bootCamp.bootCampDetails)
-  @JoinColumn({ name: 'bootcamp_id' })
-  bootCamp: BootCamp;
+  @ManyToOne(() => Bootcamp, bootcamp => bootcamp.bootcampDetail)
+  @JoinColumn({ name: 'Bootcamp_id' })
+  bootcamp: Bootcamp;
 
   @OneToMany(
-    () => BootCampDetailsSkillsMap,
-    bootCampDetailsSkillsMap => bootCampDetailsSkillsMap.bootCampDetails,
+    () => BootcampDetailSkillMap,
+    bootcampDetailSkillMap => bootcampDetailSkillMap.bootcampDetail,
   )
-  bootCampDetailSkillsMap: BootCampDetailsSkillsMap[];
+  bootcampDetailSkillMap: BootcampDetailSkillMap[];
 
   @OneToMany(
-    () => BootCampDetailsTagsMap,
-    bootCampDetailsTagsMap => bootCampDetailsTagsMap.bootCampDetails,
+    () => BootcampDetailTagMap,
+    bootcampDetailTagMap => bootcampDetailTagMap.bootcampDetail,
   )
-  bootCampDetailsTagsMap: BootCampDetailsTagsMap[];
+  bootcampDetailTagMap: BootcampDetailTagMap[];
 }

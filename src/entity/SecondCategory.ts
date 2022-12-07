@@ -1,7 +1,8 @@
-import { BootCampSecondCategoryMap } from './BootCampSecondCategory';
+import { BootcampSecondCategoryMap } from './BootcampSecondCategoryMap';
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -17,11 +18,12 @@ export class SecondCategory {
   name: string;
 
   @ManyToOne(() => FirstCategory, firstCategory => firstCategory.secondCategory)
+  @JoinColumn({ name: 'first_category_id' })
   firstCategory: FirstCategory;
 
   @OneToMany(
-    () => BootCampSecondCategoryMap,
-    bootCampSecondCategoryMap => bootCampSecondCategoryMap.secondCategory,
+    () => BootcampSecondCategoryMap,
+    bootcampSecondCategoryMap => bootcampSecondCategoryMap.secondCategory,
   )
-  bootCampSecondCategoryMap: BootCampSecondCategoryMap[];
+  bootcampSecondCategoryMap: BootcampSecondCategoryMap[];
 }

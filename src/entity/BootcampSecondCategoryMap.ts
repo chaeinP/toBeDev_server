@@ -1,19 +1,19 @@
 import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { SecondCategory } from '@entity/SecondCategory';
-import { BootCamp } from './BootCamp';
+import { Bootcamp } from './Bootcamp';
 
 @Entity({ name: 'bootcamp_second_category_map' })
-export class BootCampSecondCategoryMap {
+export class BootcampSecondCategoryMap {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => BootCamp, bootCamp => bootCamp.bootCampSecondCategoryMap)
+  @ManyToOne(() => Bootcamp, bootcamp => bootcamp.bootcampSecondCategoryMap)
   @JoinColumn({ name: 'bootcamp_id' })
-  bootCamp: BootCamp;
+  bootcamp: Bootcamp;
 
   @ManyToOne(
     () => SecondCategory,
-    secondCategory => secondCategory.bootCampSecondCategoryMap,
+    secondCategory => secondCategory.bootcampSecondCategoryMap,
   )
   @JoinColumn({ name: 'second_category_id' })
   secondCategory: SecondCategory;
