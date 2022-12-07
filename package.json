@@ -4,10 +4,11 @@
   "description": "toBeDev Project Server",
   "main": "index.js",
   "scripts": {
+    "swagger": "tsoa swagger && mkdir -p dist && cp ./src/swagger.json ./dist/swagger.json",
+    "routes": "tsoa routes",
+    "build": "npm run routes && npm run swagger && tsc --build",
     "dev": "env-cmd -f .env.dev ts-node-dev -r tsconfig-paths/register --inspect --ignore-watch node_modules src/server.ts",
-    "build": "tsc",
-    "serve": "pm2 start dist/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "pm2 start dist/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,9 +16,13 @@
     "cors": "^2.8.5",
     "env-cmd": "^10.1.0",
     "express": "^4.18.2",
+    "inversify": "^6.0.1",
+    "inversify-binding-decorators": "^4.0.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.39",
     "mysql2": "^2.3.3",
+    "swagger-ui-express": "^4.6.0",
+    "tsoa": "^4.1.3",
     "typeorm": "^0.3.10"
   },
   "devDependencies": {
