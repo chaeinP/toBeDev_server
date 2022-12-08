@@ -1,8 +1,14 @@
 import { BootcampBrand } from '@entity/BootcampBrand';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  BaseEntity,
+} from 'typeorm';
 
 @Entity({ name: 'edu_company' })
-export class EduCompany {
+export class EduCompany extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

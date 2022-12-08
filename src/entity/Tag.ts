@@ -1,8 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { BootcampDetailTagMap } from './BootcampDetailTagMap';
 
-@Entity({ name: 'tags' })
-export class Tag {
+@Entity({ name: 'tag' })
+export class Tag extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

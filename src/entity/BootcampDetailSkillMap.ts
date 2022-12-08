@@ -1,9 +1,15 @@
-import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { BootcampDetail } from './BootcampDetail';
 import { Skill } from './Skill';
 
-@Entity({ name: 'bootcamp_details_skills_map' })
-export class BootcampDetailSkillMap {
+@Entity({ name: 'bootcamp_detail_skill_map' })
+export class BootcampDetailSkillMap extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -11,10 +17,10 @@ export class BootcampDetailSkillMap {
     () => BootcampDetail,
     bootcampDetail => bootcampDetail.bootcampDetailSkillMap,
   )
-  @JoinColumn({ name: 'bootcamp_details_id' })
+  @JoinColumn({ name: 'bootcamp_detail_id', referencedColumnName: 'id' })
   bootcampDetail: BootcampDetail;
 
   @ManyToOne(() => Skill, skill => skill.bootcampDetailSkillMap)
-  @JoinColumn({ name: 'skills_id' })
+  @JoinColumn({ name: 'skill_id', referencedColumnName: 'id' })
   skill: Skill;
 }

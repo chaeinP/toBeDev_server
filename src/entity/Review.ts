@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   JoinColumn,
@@ -6,11 +7,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { SecondCategory } from '@entity/SecondCategory';
+
 import { Bootcamp } from './Bootcamp';
 
 @Entity({ name: 'reviews' })
-export class Review {
+export class Review extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,6 +19,6 @@ export class Review {
   origin_url: string;
 
   @ManyToOne(() => Bootcamp, bootcamp => bootcamp.review)
-  @JoinColumn({ name: 'bootcamp_id' })
+  @JoinColumn({ name: 'bootcamp_id', referencedColumnName: 'id' })
   bootcamp: Bootcamp;
 }

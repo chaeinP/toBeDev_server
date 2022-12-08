@@ -1,8 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { SecondCategory } from '@entity/SecondCategory';
 
 @Entity({ name: 'first_category' })
-export class FirstCategory {
+export class FirstCategory extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

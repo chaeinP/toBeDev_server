@@ -1,0 +1,22 @@
+{
+  "basePath": "/",
+  "entryFile": "./src/index.ts",
+  "noImplicitAdditionalProperties": true,
+  "controllerPathGlobs": ["./src/controllers/**/*Controller.ts"],
+  "spec": {
+    "specVersion": 3,
+    "contact": {
+      "email": "pca0046@gmail.com",
+      "name": "박채인"
+    },
+    "host": "localhost:8080",
+    "outputDirectory": "./src",
+    "schemes": ["http"]
+  },
+  "routes": {
+    "routesDir": "./src/routes",
+    "middleware": "express",
+    "iocModule": "./src/config/ioc"
+  },
+  "ignore": ["**/node_modules/**", "./src/__test__/**"]
+}

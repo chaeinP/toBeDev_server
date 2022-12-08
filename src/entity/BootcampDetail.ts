@@ -1,6 +1,7 @@
 import { BootcampDetailSkillMap } from './BootcampDetailSkillMap';
 import { Bootcamp } from './Bootcamp';
 import {
+  BaseEntity,
   Column,
   Entity,
   JoinColumn,
@@ -22,8 +23,8 @@ export enum Status {
   '모집마감',
 }
 
-@Entity({ name: 'Bootcamp_details' })
-export class BootcampDetail {
+@Entity({ name: 'bootcamp_detail' })
+export class BootcampDetail extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -94,7 +95,7 @@ export class BootcampDetail {
   period: number;
 
   @ManyToOne(() => Bootcamp, bootcamp => bootcamp.bootcampDetail)
-  @JoinColumn({ name: 'Bootcamp_id' })
+  @JoinColumn({ name: 'bootcamp_id', referencedColumnName: 'id' })
   bootcamp: Bootcamp;
 
   @OneToMany(

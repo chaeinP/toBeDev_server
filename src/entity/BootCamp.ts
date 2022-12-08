@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   JoinColumn,
@@ -12,7 +13,7 @@ import { BootcampDetail } from './BootcampDetail';
 import { Review } from './Review';
 
 @Entity({ name: 'bootcamp' })
-export class Bootcamp {
+export class Bootcamp extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,7 +21,7 @@ export class Bootcamp {
   name: string;
 
   @ManyToOne(() => BootcampBrand, bootcampBrand => bootcampBrand.bootcamp)
-  @JoinColumn({ name: 'bootcamp_brand_id' })
+  @JoinColumn({ name: 'bootcamp_brand_id', referencedColumnName: 'id' })
   bootcampBrand: BootcampBrand;
 
   @OneToMany(
