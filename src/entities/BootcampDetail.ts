@@ -1,7 +1,6 @@
 import { BootcampDetailSkillMap } from './BootcampDetailSkillMap';
-import { Bootcamp } from './Bootcamp';
+import { Bootcamp } from '.';
 import {
-  BaseEntity,
   Column,
   Entity,
   JoinColumn,
@@ -9,7 +8,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { BootcampDetailTagMap } from './BootcampDetailTagMap';
+import { BootcampDetailTagMap } from '.';
 
 export enum IsOnline {
   offline,
@@ -24,7 +23,7 @@ export enum Status {
 }
 
 @Entity({ name: 'bootcamp_detail' })
-export class BootcampDetail extends BaseEntity {
+export class BootcampDetail {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -94,7 +93,7 @@ export class BootcampDetail extends BaseEntity {
   @Column({ type: 'int' })
   period: number;
 
-  @ManyToOne(() => Bootcamp, bootcamp => bootcamp.bootcampDetail)
+  @ManyToOne(() => Bootcamp, bootcamp => bootcamp.bootcampDetails)
   @JoinColumn({ name: 'bootcamp_id', referencedColumnName: 'id' })
   bootcamp: Bootcamp;
 
@@ -102,11 +101,11 @@ export class BootcampDetail extends BaseEntity {
     () => BootcampDetailSkillMap,
     bootcampDetailSkillMap => bootcampDetailSkillMap.bootcampDetail,
   )
-  bootcampDetailSkillMap: BootcampDetailSkillMap[];
+  bootcampDetailSkillMaps: BootcampDetailSkillMap[];
 
   @OneToMany(
     () => BootcampDetailTagMap,
     bootcampDetailTagMap => bootcampDetailTagMap.bootcampDetail,
   )
-  bootcampDetailTagMap: BootcampDetailTagMap[];
+  bootcampDetailTagMaps: BootcampDetailTagMap[];
 }

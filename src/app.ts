@@ -1,7 +1,12 @@
+import { errorHandler } from '@middlewares/errorHandler';
 import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
-import { dataSource } from '@config/data-source';
+import { dataSource } from '@config/dataSource';
+import { RegisterRoutes } from '@routes/routes';
+import swaggerUI from 'swagger-ui-express';
+import swaggerFile from './swagger.json';
+
 const app: express.Application = express();
 
 dataSource
@@ -13,10 +18,8 @@ dataSource
 
 app.use(express.json());
 app.use(cors());
-
-// 데이터 insert 기능 부터 추가하자
-// 공통 에러 처리
-// tsoa 라우팅 추가
-
-app.get('/', (req, res) => res.send('Hello World'));
+RegisterRoutes(app);
+app.get('/health', (req, res) => res.send('OK'));
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerFile));
+app.use(errorHandler);
 export default app;

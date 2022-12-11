@@ -1,7 +1,7 @@
 {
   "basePath": "/",
-  "entryFile": "./src/index.ts",
-  "noImplicitAdditionalProperties": true,
+  "entryFile": "./src/app.ts",
+  "noImplicitAdditionalProperties": "silently-remove-extras",
   "controllerPathGlobs": ["./src/controllers/**/*Controller.ts"],
   "spec": {
     "specVersion": 3,
@@ -16,7 +16,24 @@
   "routes": {
     "routesDir": "./src/routes",
     "middleware": "express",
-    "iocModule": "./src/config/ioc"
+    "iocModule": "./src/ioc/iocContainer",
+    "noWriteIfUnchanged": true
+  },
+  "compilerOptions": {
+    "paths": {
+      "@config/*": ["./src/config/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@service/*": ["./src/service/*"],
+      "@repositories/*": ["./src/repositories/*"],
+      "@dto/*": ["./src/dto/*"],
+      "@exceptions/*": ["./src/exceptions/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@ioc/*": ["./src/ioc/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@types/*": ["./src/@types/*"]
+    }
   },
   "ignore": ["**/node_modules/**", "./src/__test__/**"]
 }

@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   Column,
   Entity,
   JoinColumn,
@@ -7,20 +6,22 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { BootcampBrand } from '@entity/BootcampBrand';
-import { BootcampSecondCategoryMap } from './BootcampSecondCategoryMap';
-import { BootcampDetail } from './BootcampDetail';
-import { Review } from './Review';
+import {
+  BootcampBrand,
+  BootcampSecondCategoryMap,
+  BootcampDetail,
+  Review,
+} from '.';
 
 @Entity({ name: 'bootcamp' })
-export class Bootcamp extends BaseEntity {
+export class Bootcamp {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
-  @ManyToOne(() => BootcampBrand, bootcampBrand => bootcampBrand.bootcamp)
+  @ManyToOne(() => BootcampBrand, bootcampBrand => bootcampBrand.bootcamps)
   @JoinColumn({ name: 'bootcamp_brand_id', referencedColumnName: 'id' })
   bootcampBrand: BootcampBrand;
 
@@ -28,11 +29,11 @@ export class Bootcamp extends BaseEntity {
     () => BootcampSecondCategoryMap,
     bootcampSecondCategoryMap => bootcampSecondCategoryMap.bootcamp,
   )
-  bootcampSecondCategoryMap: BootcampSecondCategoryMap[];
+  bootcampSecondCategoryMaps: BootcampSecondCategoryMap[];
 
   @OneToMany(() => BootcampDetail, bootcampDetail => bootcampDetail.bootcamp)
-  bootcampDetail: BootcampDetail[];
+  bootcampDetails: BootcampDetail[];
 
   @OneToMany(() => Review, review => review.bootcamp)
-  review: Review[];
+  reviews: Review[];
 }

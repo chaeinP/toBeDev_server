@@ -1,0 +1,12 @@
+export { Bootcamp } from '@entities/BootCamp';
+export { BootcampBrand } from '@entities/BootCampBrand';
+export { BootcampDetail } from '@entities/BootCampDetail';
+export { BootcampDetailSkillMap } from '@entities/BootcampDetailSkillMap';
+export { BootcampDetailTagMap } from '@entities/BootcampDetailTagMap';
+export { BootcampSecondCategoryMap } from '@entities/BootcampSecondCategoryMap';
+export { EduCompany } from '@entities/EduCompany';
+export { FirstCategory } from '@entities/FirstCategory';
+export { SecondCategory } from '@entities/SecondCategory';
+export { Review } from '@entities/Review';
+export { Skill } from '@entities/Skill';
+export { Tag } from '@entities/Tag';

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
@@ -9,14 +9,22 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
+    "resolveJsonModule": true,
     "paths": {
-      "@service/*": ["./src/service/*"],
-      "@controllers/*": ["./src/controllers/*"],
       "@config/*": ["./src/config/*"],
-      "@libs/*": ["./src/libs/*"],
-      "@entity/*": ["./src/entity/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@service/*": ["./src/service/*"],
+      "@repositories/*": ["./src/repositories/*"],
+      "@dto/*": ["./src/dto/*"],
+      "@exceptions/*": ["./src/exceptions/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@ioc/*": ["./src/ioc/*"],
+      "@entities/*": ["./src/entities/*"],
       "@routes/*": ["./src/routes/*"],
       "@types/*": ["./src/@types/*"]
     }
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

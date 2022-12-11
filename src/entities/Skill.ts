@@ -1,14 +1,8 @@
 import { BootcampDetailSkillMap } from './BootcampDetailSkillMap';
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'skill' })
-export class Skill extends BaseEntity {
+export class Skill {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,5 +13,5 @@ export class Skill extends BaseEntity {
     () => BootcampDetailSkillMap,
     bootcampDetailSkillMap => bootcampDetailSkillMap.bootcampDetail,
   )
-  bootcampDetailSkillMap: BootcampDetailSkillMap[];
+  bootcampDetailSkillMaps: BootcampDetailSkillMap[];
 }

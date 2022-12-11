@@ -5,10 +5,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { BootcampDetailTagMap } from './BootcampDetailTagMap';
+import { BootcampDetailTagMap } from '.';
 
 @Entity({ name: 'tag' })
-export class Tag extends BaseEntity {
+export class Tag {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,5 +19,5 @@ export class Tag extends BaseEntity {
     () => BootcampDetailTagMap,
     BootcampDetailTagMap => BootcampDetailTagMap.bootcampDetail,
   )
-  bootcampDetailTagMap: BootcampDetailTagMap[];
+  bootcampDetailTagMaps: BootcampDetailTagMap[];
 }

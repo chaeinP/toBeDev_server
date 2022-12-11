@@ -5,23 +5,21 @@ import {
   OneToMany,
   ManyToOne,
   JoinColumn,
-  BaseEntity,
 } from 'typeorm';
-import { EduCompany } from '@entity/EduCompany';
-import { Bootcamp } from './Bootcamp';
+import { Bootcamp, EduCompany } from '.';
 
 @Entity({ name: 'bootcamp_brand' })
-export class BootcampBrand extends BaseEntity {
+export class BootcampBrand {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
-  @ManyToOne(() => EduCompany, eduCompany => eduCompany.bootcampBrand)
+  @ManyToOne(() => EduCompany, eduCompany => eduCompany.bootcampBrands)
   @JoinColumn({ name: 'edu_company_id', referencedColumnName: 'id' })
   eduCompany: EduCompany;
 
   @OneToMany(() => Bootcamp, bootcamp => bootcamp.bootcampBrand)
-  bootcamp: Bootcamp[];
+  bootcamps: Bootcamp[];
 }

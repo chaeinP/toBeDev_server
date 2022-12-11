@@ -1,0 +1,164 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"ResponsePayload_null_": {
+				"properties": {
+					"statusCode": {
+						"type": "number",
+						"format": "double"
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "number",
+						"enum": [
+							null
+						],
+						"nullable": true
+					}
+				},
+				"required": [
+					"statusCode",
+					"success",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CategoryCreateDto": {
+				"properties": {
+					"firstCategory": {
+						"type": "string"
+					},
+					"secondCategories": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"firstCategory",
+					"secondCategories"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FieldErrors": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": {
+					"properties": {
+						"value": {},
+						"message": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"message"
+					],
+					"type": "object"
+				}
+			},
+			"ErrorResponsePayload": {
+				"properties": {
+					"statusCode": {
+						"type": "number",
+						"format": "double"
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"details": {
+						"$ref": "#/components/schemas/FieldErrors"
+					},
+					"stack": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"statusCode",
+					"success",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "server",
+		"version": "1.0.0",
+		"description": "toBeDev Project Server",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"email": "pca0046@gmail.com",
+			"name": "박채인"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/category": {
+			"post": {
+				"operationId": "PostCategory",
+				"responses": {
+					"201": {
+						"description": "CREATED",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ResponsePayload_null_"
+								}
+							}
+						}
+					},
+					"409": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponsePayload"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Category"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CategoryCreateDto"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "http://localhost:8080/"
+		}
+	]
+}
