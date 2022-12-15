@@ -1,4 +1,4 @@
-export interface CategoryCreateDto {
+export interface CreateCategoryDto {
   firstCategory: string;
   secondCategories: string[];
 }
