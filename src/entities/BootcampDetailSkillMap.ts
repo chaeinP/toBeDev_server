@@ -1,11 +1,9 @@
-import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { BootcampDetail, Skill } from '.';
+import { Base } from './Base';
 
 @Entity({ name: 'bootcamp_detail_skill_map' })
-export class BootcampDetailSkillMap {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class BootcampDetailSkillMap extends Base {
   @ManyToOne(
     () => BootcampDetail,
     bootcampDetail => bootcampDetail.bootcampDetailSkillMaps,

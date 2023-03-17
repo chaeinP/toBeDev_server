@@ -7,9 +7,10 @@ import {
 } from 'typeorm';
 
 import { Bootcamp } from '.';
+import { Base } from './Base';
 
 @Entity({ name: 'review' })
-export class Review {
+export class Review extends Base {
   @PrimaryGeneratedColumn()
   id: number;
 

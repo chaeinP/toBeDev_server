@@ -1,4 +1,3 @@
-import { CreateSecondCategoryDto } from './../dto/category/CreateSecondCategoryDto';
 import { inject } from 'inversify';
 import httpStatus from 'http-status';
 import {
@@ -11,15 +10,28 @@ import {
   TsoaResponse,
   SuccessResponse,
   Get,
+  Path,
+  Middlewares,
+  Request,
 } from 'tsoa';
 
-import { ResponsePayload, ErrorResponsePayload } from '@utils/response';
 import { provideSingleton } from '@ioc/provideSingletone';
-import { CreateCategoryDto } from '@dto/category/CreateCategoryDto';
+import {
+  CreateSecondCategoryReqDto,
+  CreateCategoryReqDto,
+  GetCategoriesResDto,
+} from '@dto/category';
 import { CategoryService } from '@service/CategoryService';
-import { FirstCategory } from '@entities/index';
+import { ResponsePayload } from '@common/responses/ResponsePayload';
+import {
+  CommonErrorPayload,
+  ErrorResponsePayload,
+  ValidationErrorPayload,
+} from '@common/responses/ErrorResponsePayload';
+import { firstCategoryIdValidator } from '@middlewares/firstCategoryIdValidator';
+import * as express from 'express';
 
-@Route('/category')
+@Route('/categories')
 @Tags('Category')
 @provideSingleton(CategoryController)
 export class CategoryController extends Controller {
@@ -31,30 +43,36 @@ export class CategoryController extends Controller {
 
   @Get('/')
   @SuccessResponse(200, 'OK')
-  async getCategoryList(): Promise<ResponsePayload<FirstCategory[]>> {
-    const categoryList = await this.categoryService.getCategoryList();
+  async getCategories(): Promise<ResponsePayload<GetCategoriesResDto[]>> {
+    const categoryList = await this.categoryService.getCategories();
     return new ResponsePayload(httpStatus.OK, categoryList);
   }
 
   @Post('/')
   @SuccessResponse(201, 'CREATED')
   async postCategory(
-    @Body() body: CreateCategoryDto,
-    @Res() ConflictResponse: TsoaResponse<409, ErrorResponsePayload>,
+    @Body() body: CreateCategoryReqDto,
+    @Res() BadRequestResponse: TsoaResponse<400, ValidationErrorPayload>,
+    @Res() ConflictResponse: TsoaResponse<409, CommonErrorPayload>,
   ): Promise<ResponsePayload<null>> {
     await this.categoryService.createCategory(body);
-    this.setStatus(httpStatus.CREATED);
     return new ResponsePayload(httpStatus.CREATED);
   }
 
-  @Post('/second')
+  @Post('/{firstCategoryId}/second-categories')
+  @Middlewares(firstCategoryIdValidator)
   @SuccessResponse(201, 'CREATED')
   async postSecondCategory(
-    @Body() body: CreateSecondCategoryDto,
+    @Path() firstCategoryId: number,
+    @Body() body: CreateSecondCategoryReqDto,
+    @Request() req: express.Request,
+    @Res() BadRequestResponse: TsoaResponse<400, ValidationErrorPayload>,
     @Res() NotFoundResponse: TsoaResponse<404, ErrorResponsePayload>,
   ): Promise<ResponsePayload<null>> {
-    await this.categoryService.createSecondCategory(body);
-    this.setStatus(httpStatus.CREATED);
+    await this.categoryService.createSecondCategory(
+      body,
+      req.extraData.firstCategory,
+    );
     return new ResponsePayload(httpStatus.CREATED);
   }
 }

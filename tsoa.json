@@ -26,12 +26,10 @@
       "@service/*": ["./src/service/*"],
       "@repositories/*": ["./src/repositories/*"],
       "@dto/*": ["./src/dto/*"],
-      "@exceptions/*": ["./src/exceptions/*"],
+      "@common/*": ["./src/common/*"],
       "@middlewares/*": ["./src/middlewares/*"],
-      "@utils/*": ["./src/utils/*"],
       "@ioc/*": ["./src/ioc/*"],
       "@entities/*": ["./src/entities/*"],
-      "@routes/*": ["./src/routes/*"],
       "@types/*": ["./src/@types/*"]
     }
   },

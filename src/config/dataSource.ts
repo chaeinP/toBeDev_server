@@ -15,4 +15,6 @@ export const dataSource = new DataSource({
   entities: [path.join(__dirname + '/../entities/index{.js,.ts}')],
   synchronize: true,
   dropSchema: true,
+  timezone: 'Z',
+  charset: 'utf8mb4',
 });

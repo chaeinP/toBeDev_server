@@ -3,7 +3,15 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse, fetchMiddlewares } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { BootcampBrandController } from './../controllers/BootcampBrandController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { BootcampController } from './../controllers/BootcampController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { CategoryController } from './../controllers/CategoryController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { EduCompanyController } from './../controllers/EduCompanyController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { TagController } from './../controllers/TagController';
 import { iocContainer } from './../ioc/iocContainer';
 import { IocContainer, IocContainerFactory } from '@tsoa/runtime';
 import type { RequestHandler } from 'express';
@@ -12,20 +20,13 @@ import * as express from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "FirstCategory": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"dataType":"double","required":true},
-            "name": {"dataType":"string","required":true},
-            "secondCategories": {"dataType":"array","array":{"dataType":"refObject","ref":"SecondCategory"},"required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BootcampBrand": {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
             "name": {"dataType":"string","required":true},
             "eduCompany": {"ref":"EduCompany","required":true},
             "bootcamps": {"dataType":"array","array":{"dataType":"refObject","ref":"Bootcamp"},"required":true},
@@ -37,6 +38,9 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
             "name": {"dataType":"string","required":true},
             "bootcampBrands": {"dataType":"array","array":{"dataType":"refObject","ref":"BootcampBrand"},"required":true},
         },
@@ -47,6 +51,9 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
             "name": {"dataType":"string","required":true},
             "bootcampBrand": {"ref":"BootcampBrand","required":true},
             "bootcampSecondCategoryMaps": {"dataType":"array","array":{"dataType":"refObject","ref":"BootcampSecondCategoryMap"},"required":true},
@@ -56,10 +63,40 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "SecondCategory": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
+            "name": {"dataType":"string","required":true},
+            "firstCategory": {"ref":"FirstCategory","required":true},
+            "bootcampSecondCategoryMaps": {"dataType":"array","array":{"dataType":"refObject","ref":"BootcampSecondCategoryMap"},"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "FirstCategory": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
+            "name": {"dataType":"string","required":true},
+            "secondCategories": {"dataType":"array","array":{"dataType":"refObject","ref":"SecondCategory"},"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BootcampSecondCategoryMap": {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
             "bootcamp": {"ref":"Bootcamp","required":true},
             "secondCategory": {"ref":"SecondCategory","required":true},
         },
@@ -80,28 +117,30 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
             "productTitle": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
             "originUrl": {"dataType":"string","required":true},
             "regStartDate": {"dataType":"datetime","required":true},
             "regEndDate": {"dataType":"datetime","required":true},
-            "studyTime": {"dataType":"string","required":true},
-            "nDaysAWeek": {"dataType":"double","required":true},
-            "quota": {"dataType":"double","required":true},
-            "isOnline": {"ref":"IsOnline","required":true},
-            "location": {"dataType":"string","required":true},
-            "tuition": {"dataType":"double","required":true},
-            "contact": {"dataType":"string","required":true},
-            "views": {"dataType":"double","required":true},
-            "thumbnailUrl": {"dataType":"string","required":true},
-            "ciUrl": {"dataType":"string","required":true},
-            "content": {"dataType":"string","required":true},
-            "curriculumn": {"dataType":"string","required":true},
-            "nth": {"dataType":"double","required":true},
-            "status": {"ref":"Status","required":true},
-            "startDate": {"dataType":"datetime","required":true},
-            "endDate": {"dataType":"datetime","required":true},
-            "period": {"dataType":"double","required":true},
+            "studyTime": {"dataType":"string"},
+            "nDaysAWeek": {"dataType":"double"},
+            "quota": {"dataType":"double"},
+            "isOnline": {"ref":"IsOnline"},
+            "location": {"dataType":"string"},
+            "tuition": {"dataType":"double"},
+            "contact": {"dataType":"string"},
+            "views": {"dataType":"double"},
+            "thumbnailUrl": {"dataType":"string"},
+            "ciUrl": {"dataType":"string"},
+            "content": {"dataType":"string"},
+            "curriculumn": {"dataType":"string"},
+            "nth": {"dataType":"double"},
+            "status": {"ref":"Status"},
+            "startDate": {"dataType":"datetime"},
+            "endDate": {"dataType":"datetime"},
             "bootcamp": {"ref":"Bootcamp","required":true},
             "bootcampDetailSkillMaps": {"dataType":"array","array":{"dataType":"refObject","ref":"BootcampDetailSkillMap"},"required":true},
             "bootcampDetailTagMaps": {"dataType":"array","array":{"dataType":"refObject","ref":"BootcampDetailTagMap"},"required":true},
@@ -113,6 +152,9 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
             "bootcampDetail": {"ref":"BootcampDetail","required":true},
             "skill": {"ref":"Skill","required":true},
         },
@@ -123,6 +165,9 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
             "skill": {"dataType":"string","required":true},
             "bootcampDetailSkillMaps": {"dataType":"array","array":{"dataType":"refObject","ref":"BootcampDetailSkillMap"},"required":true},
         },
@@ -133,6 +178,9 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
             "bootcampDetail": {"ref":"BootcampDetail","required":true},
             "tags": {"ref":"Tag","required":true},
         },
@@ -143,6 +191,9 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
             "tag": {"dataType":"string","required":true},
             "bootcampDetailTagMaps": {"dataType":"array","array":{"dataType":"refObject","ref":"BootcampDetailTagMap"},"required":true},
         },
@@ -153,30 +204,87 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
             "origin_url": {"dataType":"string","required":true},
             "bootcamp": {"ref":"Bootcamp","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "SecondCategory": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"dataType":"double","required":true},
-            "name": {"dataType":"string","required":true},
-            "firstCategory": {"ref":"FirstCategory","required":true},
-            "bootcampSecondCategoryMaps": {"dataType":"array","array":{"dataType":"refObject","ref":"BootcampSecondCategoryMap"},"required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ResponsePayload_FirstCategory-Array_": {
+    "ResponsePayload_BootcampBrand-Array_": {
         "dataType": "refObject",
         "properties": {
             "statusCode": {"dataType":"double","required":true},
             "success": {"dataType":"boolean","required":true},
             "message": {"dataType":"string","required":true},
-            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"FirstCategory"}},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"BootcampBrand"}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Pick_ErrorResponsePayload.Exclude_keyofErrorResponsePayload.details-or-stack__": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"statusCode":{"dataType":"double","required":true},"success":{"dataType":"boolean","required":true},"message":{"dataType":"string","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Omit_ErrorResponsePayload.details-or-stack_": {
+        "dataType": "refAlias",
+        "type": {"ref":"Pick_ErrorResponsePayload.Exclude_keyofErrorResponsePayload.details-or-stack__","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CommonErrorPayload": {
+        "dataType": "refAlias",
+        "type": {"ref":"Omit_ErrorResponsePayload.details-or-stack_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateBootcampBrandDto": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+            "eduCompanyId": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ResponsePayload_Bootcamp-Array_": {
+        "dataType": "refObject",
+        "properties": {
+            "statusCode": {"dataType":"double","required":true},
+            "success": {"dataType":"boolean","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"Bootcamp"}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateBootcampDto": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+            "bootcampBrandId": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "GetCategoriesResDto": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"double","required":true},
+            "name": {"dataType":"string","required":true},
+            "secondCategories": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}},"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ResponsePayload_GetCategoriesResDto-Array_": {
+        "dataType": "refObject",
+        "properties": {
+            "statusCode": {"dataType":"double","required":true},
+            "success": {"dataType":"boolean","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"GetCategoriesResDto"}},
         },
         "additionalProperties": false,
     },
@@ -192,7 +300,7 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "CreateCategoryDto": {
+    "CreateCategoryReqDto": {
         "dataType": "refObject",
         "properties": {
             "firstCategory": {"dataType":"string","required":true},
@@ -208,6 +316,29 @@ const models: TsoaRoute.Models = {
         "additionalProperties": {"dataType":"nestedObjectLiteral","nestedProperties":{"value":{"dataType":"any"},"message":{"dataType":"string","required":true}}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Pick_ErrorResponsePayload.Exclude_keyofErrorResponsePayload.stack__": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"details":{"ref":"FieldErrors"},"statusCode":{"dataType":"double","required":true},"success":{"dataType":"boolean","required":true},"message":{"dataType":"string","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Omit_ErrorResponsePayload.stack_": {
+        "dataType": "refAlias",
+        "type": {"ref":"Pick_ErrorResponsePayload.Exclude_keyofErrorResponsePayload.stack__","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ValidationErrorPayload": {
+        "dataType": "refAlias",
+        "type": {"ref":"Omit_ErrorResponsePayload.stack_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateSecondCategoryReqDto": {
+        "dataType": "refObject",
+        "properties": {
+            "secondCategory": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ErrorResponsePayload": {
         "dataType": "refObject",
         "properties": {
@@ -220,11 +351,40 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "CreateSecondCategoryDto": {
+    "ResponsePayload_EduCompany-Array_": {
         "dataType": "refObject",
         "properties": {
-            "firstCategoryId": {"dataType":"double","required":true},
-            "secondCategory": {"dataType":"string","required":true},
+            "statusCode": {"dataType":"double","required":true},
+            "success": {"dataType":"boolean","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"EduCompany"}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateEduCompanyDto": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ResponsePayload_Tag-Array_": {
+        "dataType": "refObject",
+        "properties": {
+            "statusCode": {"dataType":"double","required":true},
+            "success": {"dataType":"boolean","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"Tag"}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateTagDto": {
+        "dataType": "refObject",
+        "properties": {
+            "tag": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -239,11 +399,137 @@ export function RegisterRoutes(app: express.Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-        app.get('/category',
-            ...(fetchMiddlewares<RequestHandler>(CategoryController)),
-            ...(fetchMiddlewares<RequestHandler>(CategoryController.prototype.getCategoryList)),
+        app.get('/bootcamp-brands',
+            ...(fetchMiddlewares<RequestHandler>(BootcampBrandController)),
+            ...(fetchMiddlewares<RequestHandler>(BootcampBrandController.prototype.getByEduCompanyId)),
 
-            async function CategoryController_getCategoryList(request: any, response: any, next: any) {
+            async function BootcampBrandController_getByEduCompanyId(request: any, response: any, next: any) {
+            const args = {
+                    eduCompanyId: {"in":"query","name":"eduCompanyId","required":true,"dataType":"string"},
+                    NotFoundResponse: {"in":"res","name":"404","required":true,"ref":"CommonErrorPayload"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+                const controller: any = await container.get<BootcampBrandController>(BootcampBrandController);
+                if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+                }
+
+
+              const promise = controller.getByEduCompanyId.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 200, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/bootcamp-brands',
+            ...(fetchMiddlewares<RequestHandler>(BootcampBrandController)),
+            ...(fetchMiddlewares<RequestHandler>(BootcampBrandController.prototype.postBootcampBrand)),
+
+            async function BootcampBrandController_postBootcampBrand(request: any, response: any, next: any) {
+            const args = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateBootcampBrandDto"},
+                    NotFoundResponse: {"in":"res","name":"404","required":true,"ref":"CommonErrorPayload"},
+                    ConflictResponse: {"in":"res","name":"409","required":true,"ref":"CommonErrorPayload"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+                const controller: any = await container.get<BootcampBrandController>(BootcampBrandController);
+                if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+                }
+
+
+              const promise = controller.postBootcampBrand.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 201, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/bootcamps',
+            ...(fetchMiddlewares<RequestHandler>(BootcampController)),
+            ...(fetchMiddlewares<RequestHandler>(BootcampController.prototype.getByBootcampBrandId)),
+
+            async function BootcampController_getByBootcampBrandId(request: any, response: any, next: any) {
+            const args = {
+                    bootcampBrandId: {"in":"query","name":"bootcampBrandId","required":true,"dataType":"string"},
+                    NotFoundResponse: {"in":"res","name":"404","required":true,"ref":"CommonErrorPayload"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+                const controller: any = await container.get<BootcampController>(BootcampController);
+                if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+                }
+
+
+              const promise = controller.getByBootcampBrandId.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 200, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/bootcamps',
+            ...(fetchMiddlewares<RequestHandler>(BootcampController)),
+            ...(fetchMiddlewares<RequestHandler>(BootcampController.prototype.postBootcampBrand)),
+
+            async function BootcampController_postBootcampBrand(request: any, response: any, next: any) {
+            const args = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateBootcampDto"},
+                    NotFoundResponse: {"in":"res","name":"404","required":true,"ref":"CommonErrorPayload"},
+                    ConflictResponse: {"in":"res","name":"409","required":true,"ref":"CommonErrorPayload"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+                const controller: any = await container.get<BootcampController>(BootcampController);
+                if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+                }
+
+
+              const promise = controller.postBootcampBrand.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 201, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/categories',
+            ...(fetchMiddlewares<RequestHandler>(CategoryController)),
+            ...(fetchMiddlewares<RequestHandler>(CategoryController.prototype.getCategories)),
+
+            async function CategoryController_getCategories(request: any, response: any, next: any) {
             const args = {
             };
 
@@ -261,21 +547,22 @@ export function RegisterRoutes(app: express.Router) {
                 }
 
 
-              const promise = controller.getCategoryList.apply(controller, validatedArgs as any);
+              const promise = controller.getCategories.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, 200, next);
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/category',
+        app.post('/categories',
             ...(fetchMiddlewares<RequestHandler>(CategoryController)),
             ...(fetchMiddlewares<RequestHandler>(CategoryController.prototype.postCategory)),
 
             async function CategoryController_postCategory(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"ref":"CreateCategoryDto"},
-                    ConflictResponse: {"in":"res","name":"409","required":true,"ref":"ErrorResponsePayload"},
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateCategoryReqDto"},
+                    BadRequestResponse: {"in":"res","name":"400","required":true,"ref":"ValidationErrorPayload"},
+                    ConflictResponse: {"in":"res","name":"409","required":true,"ref":"CommonErrorPayload"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -299,13 +586,16 @@ export function RegisterRoutes(app: express.Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/category/second',
+        app.post('/categories/:firstCategoryId/second-categories',
             ...(fetchMiddlewares<RequestHandler>(CategoryController)),
             ...(fetchMiddlewares<RequestHandler>(CategoryController.prototype.postSecondCategory)),
 
             async function CategoryController_postSecondCategory(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"ref":"CreateSecondCategoryDto"},
+                    firstCategoryId: {"in":"path","name":"firstCategoryId","required":true,"dataType":"double"},
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateSecondCategoryReqDto"},
+                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                    BadRequestResponse: {"in":"res","name":"400","required":true,"ref":"ValidationErrorPayload"},
                     NotFoundResponse: {"in":"res","name":"404","required":true,"ref":"ErrorResponsePayload"},
             };
 
@@ -324,6 +614,126 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.postSecondCategory.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 201, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/edu-companies',
+            ...(fetchMiddlewares<RequestHandler>(EduCompanyController)),
+            ...(fetchMiddlewares<RequestHandler>(EduCompanyController.prototype.getEduCompanies)),
+
+            async function EduCompanyController_getEduCompanies(request: any, response: any, next: any) {
+            const args = {
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+                const controller: any = await container.get<EduCompanyController>(EduCompanyController);
+                if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+                }
+
+
+              const promise = controller.getEduCompanies.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 200, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/edu-companies',
+            ...(fetchMiddlewares<RequestHandler>(EduCompanyController)),
+            ...(fetchMiddlewares<RequestHandler>(EduCompanyController.prototype.postEduCompany)),
+
+            async function EduCompanyController_postEduCompany(request: any, response: any, next: any) {
+            const args = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateEduCompanyDto"},
+                    ConflictResponse: {"in":"res","name":"409","required":true,"ref":"ErrorResponsePayload"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+                const controller: any = await container.get<EduCompanyController>(EduCompanyController);
+                if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+                }
+
+
+              const promise = controller.postEduCompany.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 201, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/tags',
+            ...(fetchMiddlewares<RequestHandler>(TagController)),
+            ...(fetchMiddlewares<RequestHandler>(TagController.prototype.getTags)),
+
+            async function TagController_getTags(request: any, response: any, next: any) {
+            const args = {
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+                const controller: any = await container.get<TagController>(TagController);
+                if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+                }
+
+
+              const promise = controller.getTags.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 200, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/tags',
+            ...(fetchMiddlewares<RequestHandler>(TagController)),
+            ...(fetchMiddlewares<RequestHandler>(TagController.prototype.postTag)),
+
+            async function TagController_postTag(request: any, response: any, next: any) {
+            const args = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateTagDto"},
+                    ConflictResponse: {"in":"res","name":"409","required":true,"ref":"ErrorResponsePayload"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+                const controller: any = await container.get<TagController>(TagController);
+                if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+                }
+
+
+              const promise = controller.postTag.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, 201, next);
             } catch (err) {
                 return next(err);

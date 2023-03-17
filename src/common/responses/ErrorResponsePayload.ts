@@ -1,21 +1,6 @@
-import { env } from '@config/env';
+import { Exception } from '@common/exceptions/Exception';
 import httpStatus from 'http-status';
 import { FieldErrors, ValidateError } from 'tsoa';
-import { Exception } from '../exceptions/Exception';
-
-export class ResponsePayload<T> {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data?: T;
-
-  constructor(statusCode?: number, data?: T, message?: string) {
-    this.statusCode = statusCode || httpStatus.OK;
-    this.success = true;
-    this.message = message || (httpStatus[this.statusCode] as string);
-    if (data) this.data = data;
-  }
-}
 
 export class ErrorResponsePayload {
   statusCode: number;
@@ -31,20 +16,27 @@ export class ErrorResponsePayload {
       const { statusCode, message, stack } = err.getter();
       this.statusCode = statusCode;
       this.message = message;
-      if (env.node_env !== 'live') this.stack = stack;
+      if (process.env.NODE_ENV === 'local') this.stack = stack;
     }
     // tsoa validation error
     else if (err instanceof ValidateError) {
       this.statusCode = err.status;
-      this.message = err.message;
+      this.message = 'Validation error';
       this.details = err.fields;
-      if (env.node_env !== 'live') this.stack = err.stack;
+      if (process.env.NODE_ENV === 'local') this.stack = err.stack;
     }
     // physical error
     else {
       this.statusCode = httpStatus.INTERNAL_SERVER_ERROR;
       this.message = httpStatus[500];
-      if (env.node_env !== 'live') this.stack = err.stack;
+      if (process.env.NODE_ENV === 'local') this.stack = err.stack;
     }
   }
 }
+
+export type CommonErrorPayload = Omit<
+  ErrorResponsePayload,
+  'details' | 'stack'
+>;
+
+export type ValidationErrorPayload = Omit<ErrorResponsePayload, 'stack'>;

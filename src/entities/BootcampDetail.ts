@@ -1,14 +1,8 @@
 import { BootcampDetailSkillMap } from './BootcampDetailSkillMap';
 import { Bootcamp } from '.';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { BootcampDetailTagMap } from '.';
+import { Base } from './Base';
 
 export enum IsOnline {
   offline,
@@ -23,10 +17,7 @@ export enum Status {
 }
 
 @Entity({ name: 'bootcamp_detail' })
-export class BootcampDetail {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class BootcampDetail extends Base {
   @Column({ name: 'product_title', type: 'varchar', length: 255 })
   productTitle: string;
 
@@ -42,56 +33,58 @@ export class BootcampDetail {
   @Column({ name: 'reg_end_date', type: 'date' })
   regEndDate: Date;
 
-  @Column({ name: 'study_time', type: 'varchar', length: 255 })
-  studyTime: string;
+  @Column({ name: 'study_time', type: 'varchar', length: 255, nullable: true })
+  studyTime?: string;
 
-  @Column({ name: 'ndays_a_week', type: 'int' })
-  nDaysAWeek: number;
+  @Column({ name: 'ndays_a_week', type: 'int', nullable: true })
+  nDaysAWeek?: number;
 
-  @Column({ name: 'quota', type: 'int' })
-  quota: number;
+  @Column({ name: 'quota', type: 'int', nullable: true })
+  quota?: number;
 
-  @Column({ name: 'is_online', type: 'enum', enum: IsOnline })
-  isOnline: IsOnline;
+  @Column({ name: 'is_online', type: 'enum', enum: IsOnline, nullable: true })
+  isOnline?: IsOnline;
 
-  @Column({ name: 'location', type: 'varchar' })
-  location: string;
+  @Column({ name: 'location', type: 'varchar', nullable: true })
+  location?: string;
 
-  @Column({ name: 'tuition', type: 'int' })
-  tuition: number;
+  @Column({ name: 'tuition', type: 'int', nullable: true })
+  tuition?: number;
 
-  @Column({ name: 'contact', type: 'varchar', length: '255' })
-  contact: string;
+  @Column({ name: 'contact', type: 'varchar', length: '255', nullable: true })
+  contact?: string;
 
-  @Column({ name: 'views', type: 'int' })
-  views: number;
+  @Column({ name: 'views', type: 'int', nullable: true })
+  views?: number;
 
-  @Column({ name: 'thumbnail_url', type: 'varchar', length: 255 })
-  thumbnailUrl: string;
+  @Column({
+    name: 'thumbnail_url',
+    type: 'varchar',
+    length: 255,
+    nullable: true,
+  })
+  thumbnailUrl?: string;
 
-  @Column({ name: 'ci_url', type: 'varchar', length: 255 })
-  ciUrl: string;
+  @Column({ name: 'ci_url', type: 'varchar', length: 255, nullable: true })
+  ciUrl?: string;
 
-  @Column({ name: 'content', type: 'text' })
-  content: string;
+  @Column({ name: 'content', type: 'text', nullable: true })
+  content?: string;
 
-  @Column({ type: 'text' })
-  curriculumn: string;
+  @Column({ type: 'text', nullable: true })
+  curriculumn?: string;
 
-  @Column({ type: 'int' })
-  nth: number;
+  @Column({ type: 'int', nullable: true })
+  nth?: number;
 
-  @Column({ type: 'enum', enum: Status })
-  status: Status;
+  @Column({ type: 'enum', enum: Status, nullable: true })
+  status?: Status;
 
-  @Column({ name: 'start_date', type: 'date' })
-  startDate: Date;
+  @Column({ name: 'start_date', type: 'date', nullable: true })
+  startDate?: Date;
 
-  @Column({ name: 'end_date', type: 'date' })
-  endDate: Date;
-
-  @Column({ type: 'int' })
-  period: number;
+  @Column({ name: 'end_date', type: 'date', nullable: true })
+  endDate?: Date;
 
   @ManyToOne(() => Bootcamp, bootcamp => bootcamp.bootcampDetails)
   @JoinColumn({ name: 'bootcamp_id', referencedColumnName: 'id' })
@@ -100,12 +93,14 @@ export class BootcampDetail {
   @OneToMany(
     () => BootcampDetailSkillMap,
     bootcampDetailSkillMap => bootcampDetailSkillMap.bootcampDetail,
+    { cascade: true },
   )
   bootcampDetailSkillMaps: BootcampDetailSkillMap[];
 
   @OneToMany(
     () => BootcampDetailTagMap,
     bootcampDetailTagMap => bootcampDetailTagMap.bootcampDetail,
+    { cascade: true },
   )
   bootcampDetailTagMaps: BootcampDetailTagMap[];
 }

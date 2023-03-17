@@ -6,8 +6,7 @@
   "scripts": {
     "routes": "tsoa spec-and-routes",
     "build": "npm run routes && tsc --build",
-    "local": "env-cmd -f .env.dev concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
-    "dev": "env-cmd -f .env.dev ts-node-dev -r tsconfig-paths/register --inspect --ignore-watch node_modules src/server.ts",
+    "local": "env-cmd -f .env.local concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "serve": "npm run build && pm2 start dist/server.js"
   },
   "author": "",

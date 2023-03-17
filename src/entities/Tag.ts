@@ -1,17 +1,9 @@
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { BootcampDetailTagMap } from '.';
+import { Base } from './Base';
 
 @Entity({ name: 'tag' })
-export class Tag {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Tag extends Base {
   @Column({ type: 'varchar', length: 255 })
   tag: string;
 

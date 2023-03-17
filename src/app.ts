@@ -1,10 +1,11 @@
-import { errorHandler } from '@middlewares/errorHandler';
 import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
-import { dataSource } from '@config/dataSource';
-import { RegisterRoutes } from '@routes/routes';
 import swaggerUI from 'swagger-ui-express';
+
+import { RegisterRoutes } from '@routes/routes';
+import { errorHandler } from '@middlewares/errorHandler';
+import { dataSource } from '@config/dataSource';
 import swaggerFile from './swagger.json';
 
 const app: express.Application = express();

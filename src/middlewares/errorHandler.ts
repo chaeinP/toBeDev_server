@@ -1,6 +1,6 @@
-import { ErrorResponsePayload } from './../utils/response';
-import { Exception } from './../exceptions/Exception';
-import { ErrorRequestHandler, RequestHandler } from 'express';
+import { Exception } from '@common/exceptions/Exception';
+import { ErrorRequestHandler } from 'express';
+import { ErrorResponsePayload } from '@common/responses/ErrorResponsePayload';
 
 export const errorHandler: ErrorRequestHandler = (
   err: Error | Exception,

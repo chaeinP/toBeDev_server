@@ -1,23 +1,14 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import {
   BootcampBrand,
   BootcampSecondCategoryMap,
   BootcampDetail,
   Review,
 } from '.';
+import { Base } from './Base';
 
 @Entity({ name: 'bootcamp' })
-export class Bootcamp {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Bootcamp extends Base {
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
@@ -28,12 +19,15 @@ export class Bootcamp {
   @OneToMany(
     () => BootcampSecondCategoryMap,
     bootcampSecondCategoryMap => bootcampSecondCategoryMap.bootcamp,
+    { cascade: true },
   )
   bootcampSecondCategoryMaps: BootcampSecondCategoryMap[];
 
-  @OneToMany(() => BootcampDetail, bootcampDetail => bootcampDetail.bootcamp)
+  @OneToMany(() => BootcampDetail, bootcampDetail => bootcampDetail.bootcamp, {
+    cascade: true,
+  })
   bootcampDetails: BootcampDetail[];
 
-  @OneToMany(() => Review, review => review.bootcamp)
+  @OneToMany(() => Review, review => review.bootcamp, { cascade: true })
   reviews: Review[];
 }

@@ -2,21 +2,20 @@ import { BootcampSecondCategoryMap } from './BootcampSecondCategoryMap';
 import {
   Column,
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { FirstCategory } from '.';
+import { Base } from './Base';
 
 @Entity({ name: 'second_category' })
-export class SecondCategory {
+export class SecondCategory extends Base {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Index({ unique: true })
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, unique: true })
   name: string;
 
   @ManyToOne(
@@ -29,6 +28,7 @@ export class SecondCategory {
   @OneToMany(
     () => BootcampSecondCategoryMap,
     bootcampSecondCategoryMap => bootcampSecondCategoryMap.secondCategory,
+    { cascade: true },
   )
   bootcampSecondCategoryMaps: BootcampSecondCategoryMap[];
 }

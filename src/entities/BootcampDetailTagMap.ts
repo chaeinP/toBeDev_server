@@ -1,11 +1,9 @@
 import { BootcampDetail, Tag } from '.';
-import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Base } from './Base';
 
 @Entity({ name: 'bootcamp_detail_tag_map' })
-export class BootcampDetailTagMap {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class BootcampDetailTagMap extends Base {
   @ManyToOne(
     () => BootcampDetail,
     bootcampDetail => bootcampDetail.bootcampDetailTagMaps,

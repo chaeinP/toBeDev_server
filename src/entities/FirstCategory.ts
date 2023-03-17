@@ -1,19 +1,10 @@
-import {
-  Column,
-  Entity,
-  Index,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { SecondCategory } from '.';
+import { Base } from './Base';
 
 @Entity({ name: 'first_category' })
-export class FirstCategory {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Index({ unique: true })
-  @Column({ type: 'varchar', length: 255 })
+export class FirstCategory extends Base {
+  @Column({ type: 'varchar', length: 255, unique: true })
   name: string;
 
   @OneToMany(

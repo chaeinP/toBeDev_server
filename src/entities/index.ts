@@ -1,5 +1,5 @@
-export { Bootcamp } from '@entities/BootCamp';
-export { BootcampBrand } from '@entities/BootCampBrand';
+export { Bootcamp } from '@entities/Bootcamp';
+export { BootcampBrand } from '@entities/BootcampBrand';
 export { BootcampDetail } from '@entities/BootCampDetail';
 export { BootcampDetailSkillMap } from '@entities/BootcampDetailSkillMap';
 export { BootcampDetailTagMap } from '@entities/BootcampDetailTagMap';

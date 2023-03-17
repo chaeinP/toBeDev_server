@@ -6,35 +6,23 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"FirstCategory": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"name": {
-						"type": "string"
-					},
-					"secondCategories": {
-						"items": {
-							"$ref": "#/components/schemas/SecondCategory"
-						},
-						"type": "array"
-					}
-				},
-				"required": [
-					"id",
-					"name",
-					"secondCategories"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"BootcampBrand": {
 				"properties": {
 					"id": {
 						"type": "number",
 						"format": "double"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
 					},
 					"name": {
 						"type": "string"
@@ -51,6 +39,9 @@
 				},
 				"required": [
 					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
 					"name",
 					"eduCompany",
 					"bootcamps"
@@ -64,6 +55,18 @@
 						"type": "number",
 						"format": "double"
 					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -76,6 +79,9 @@
 				},
 				"required": [
 					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
 					"name",
 					"bootcampBrands"
 				],
@@ -87,6 +93,18 @@
 					"id": {
 						"type": "number",
 						"format": "double"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
 					},
 					"name": {
 						"type": "string"
@@ -115,11 +133,96 @@
 				},
 				"required": [
 					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
 					"name",
 					"bootcampBrand",
 					"bootcampSecondCategoryMaps",
 					"bootcampDetails",
 					"reviews"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SecondCategory": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"name": {
+						"type": "string"
+					},
+					"firstCategory": {
+						"$ref": "#/components/schemas/FirstCategory"
+					},
+					"bootcampSecondCategoryMaps": {
+						"items": {
+							"$ref": "#/components/schemas/BootcampSecondCategoryMap"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
+					"name",
+					"firstCategory",
+					"bootcampSecondCategoryMaps"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FirstCategory": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"name": {
+						"type": "string"
+					},
+					"secondCategories": {
+						"items": {
+							"$ref": "#/components/schemas/SecondCategory"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
+					"name",
+					"secondCategories"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -130,6 +233,18 @@
 						"type": "number",
 						"format": "double"
 					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
 					"bootcamp": {
 						"$ref": "#/components/schemas/Bootcamp"
 					},
@@ -139,6 +254,9 @@
 				},
 				"required": [
 					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
 					"bootcamp",
 					"secondCategory"
 				],
@@ -166,6 +284,18 @@
 					"id": {
 						"type": "number",
 						"format": "double"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
 					},
 					"productTitle": {
 						"type": "string"
@@ -239,10 +369,6 @@
 						"type": "string",
 						"format": "date-time"
 					},
-					"period": {
-						"type": "number",
-						"format": "double"
-					},
 					"bootcamp": {
 						"$ref": "#/components/schemas/Bootcamp"
 					},
@@ -261,28 +387,14 @@
 				},
 				"required": [
 					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
 					"productTitle",
 					"description",
 					"originUrl",
 					"regStartDate",
 					"regEndDate",
-					"studyTime",
-					"nDaysAWeek",
-					"quota",
-					"isOnline",
-					"location",
-					"tuition",
-					"contact",
-					"views",
-					"thumbnailUrl",
-					"ciUrl",
-					"content",
-					"curriculumn",
-					"nth",
-					"status",
-					"startDate",
-					"endDate",
-					"period",
 					"bootcamp",
 					"bootcampDetailSkillMaps",
 					"bootcampDetailTagMaps"
@@ -296,6 +408,18 @@
 						"type": "number",
 						"format": "double"
 					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
 					"bootcampDetail": {
 						"$ref": "#/components/schemas/BootcampDetail"
 					},
@@ -305,6 +429,9 @@
 				},
 				"required": [
 					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
 					"bootcampDetail",
 					"skill"
 				],
@@ -316,6 +443,18 @@
 					"id": {
 						"type": "number",
 						"format": "double"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
 					},
 					"skill": {
 						"type": "string"
@@ -329,6 +468,9 @@
 				},
 				"required": [
 					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
 					"skill",
 					"bootcampDetailSkillMaps"
 				],
@@ -341,6 +483,18 @@
 						"type": "number",
 						"format": "double"
 					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
 					"bootcampDetail": {
 						"$ref": "#/components/schemas/BootcampDetail"
 					},
@@ -350,6 +504,9 @@
 				},
 				"required": [
 					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
 					"bootcampDetail",
 					"tags"
 				],
@@ -361,6 +518,18 @@
 					"id": {
 						"type": "number",
 						"format": "double"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
 					},
 					"tag": {
 						"type": "string"
@@ -374,6 +543,9 @@
 				},
 				"required": [
 					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
 					"tag",
 					"bootcampDetailTagMaps"
 				],
@@ -386,6 +558,18 @@
 						"type": "number",
 						"format": "double"
 					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
 					"origin_url": {
 						"type": "string"
 					},
@@ -395,41 +579,16 @@
 				},
 				"required": [
 					"id",
+					"createdAt",
+					"updatedAt",
+					"deletedAt",
 					"origin_url",
 					"bootcamp"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"SecondCategory": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"name": {
-						"type": "string"
-					},
-					"firstCategory": {
-						"$ref": "#/components/schemas/FirstCategory"
-					},
-					"bootcampSecondCategoryMaps": {
-						"items": {
-							"$ref": "#/components/schemas/BootcampSecondCategoryMap"
-						},
-						"type": "array"
-					}
-				},
-				"required": [
-					"id",
-					"name",
-					"firstCategory",
-					"bootcampSecondCategoryMaps"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ResponsePayload_FirstCategory-Array_": {
+			"ResponsePayload_BootcampBrand-Array_": {
 				"properties": {
 					"statusCode": {
 						"type": "number",
@@ -443,7 +602,160 @@
 					},
 					"data": {
 						"items": {
-							"$ref": "#/components/schemas/FirstCategory"
+							"$ref": "#/components/schemas/BootcampBrand"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"statusCode",
+					"success",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pick_ErrorResponsePayload.Exclude_keyofErrorResponsePayload.details-or-stack__": {
+				"properties": {
+					"statusCode": {
+						"type": "number",
+						"format": "double"
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"statusCode",
+					"success",
+					"message"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"Omit_ErrorResponsePayload.details-or-stack_": {
+				"$ref": "#/components/schemas/Pick_ErrorResponsePayload.Exclude_keyofErrorResponsePayload.details-or-stack__",
+				"description": "Construct a type with the properties of T except for those in type K."
+			},
+			"CommonErrorPayload": {
+				"$ref": "#/components/schemas/Omit_ErrorResponsePayload.details-or-stack_"
+			},
+			"CreateBootcampBrandDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"eduCompanyId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"eduCompanyId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ResponsePayload_Bootcamp-Array_": {
+				"properties": {
+					"statusCode": {
+						"type": "number",
+						"format": "double"
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/Bootcamp"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"statusCode",
+					"success",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateBootcampDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"bootcampBrandId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"bootcampBrandId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetCategoriesResDto": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"secondCategories": {
+						"items": {
+							"properties": {
+								"name": {
+									"type": "string"
+								},
+								"id": {
+									"type": "number",
+									"format": "double"
+								}
+							},
+							"required": [
+								"name",
+								"id"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"secondCategories"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ResponsePayload_GetCategoriesResDto-Array_": {
+				"properties": {
+					"statusCode": {
+						"type": "number",
+						"format": "double"
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/GetCategoriesResDto"
 						},
 						"type": "array"
 					}
@@ -484,7 +796,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"CreateCategoryDto": {
+			"CreateCategoryReqDto": {
 				"properties": {
 					"firstCategory": {
 						"type": "string"
@@ -519,6 +831,49 @@
 					"type": "object"
 				}
 			},
+			"Pick_ErrorResponsePayload.Exclude_keyofErrorResponsePayload.stack__": {
+				"properties": {
+					"details": {
+						"$ref": "#/components/schemas/FieldErrors"
+					},
+					"statusCode": {
+						"type": "number",
+						"format": "double"
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"statusCode",
+					"success",
+					"message"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"Omit_ErrorResponsePayload.stack_": {
+				"$ref": "#/components/schemas/Pick_ErrorResponsePayload.Exclude_keyofErrorResponsePayload.stack__",
+				"description": "Construct a type with the properties of T except for those in type K."
+			},
+			"ValidationErrorPayload": {
+				"$ref": "#/components/schemas/Omit_ErrorResponsePayload.stack_"
+			},
+			"CreateSecondCategoryReqDto": {
+				"properties": {
+					"secondCategory": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"secondCategory"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"ErrorResponsePayload": {
 				"properties": {
 					"statusCode": {
@@ -546,19 +901,80 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"CreateSecondCategoryDto": {
+			"ResponsePayload_EduCompany-Array_": {
 				"properties": {
-					"firstCategoryId": {
+					"statusCode": {
 						"type": "number",
 						"format": "double"
 					},
-					"secondCategory": {
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/EduCompany"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"statusCode",
+					"success",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateEduCompanyDto": {
+				"properties": {
+					"name": {
 						"type": "string"
 					}
 				},
 				"required": [
-					"firstCategoryId",
-					"secondCategory"
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ResponsePayload_Tag-Array_": {
+				"properties": {
+					"statusCode": {
+						"type": "number",
+						"format": "double"
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/Tag"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"statusCode",
+					"success",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateTagDto": {
+				"properties": {
+					"tag": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"tag"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -580,16 +996,184 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/category": {
+		"/bootcamp-brands": {
 			"get": {
-				"operationId": "GetCategoryList",
+				"operationId": "GetByEduCompanyId",
 				"responses": {
 					"200": {
 						"description": "OK",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/ResponsePayload_FirstCategory-Array_"
+									"$ref": "#/components/schemas/ResponsePayload_BootcampBrand-Array_"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CommonErrorPayload"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Bootcamp Brand"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "eduCompanyId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "PostBootcampBrand",
+				"responses": {
+					"201": {
+						"description": "CREATED"
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CommonErrorPayload"
+								}
+							}
+						}
+					},
+					"409": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CommonErrorPayload"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Bootcamp Brand"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateBootcampBrandDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/bootcamps": {
+			"get": {
+				"operationId": "GetByBootcampBrandId",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ResponsePayload_Bootcamp-Array_"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CommonErrorPayload"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Bootcamp"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "bootcampBrandId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "PostBootcampBrand",
+				"responses": {
+					"201": {
+						"description": "CREATED"
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CommonErrorPayload"
+								}
+							}
+						}
+					},
+					"409": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CommonErrorPayload"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Bootcamp"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateBootcampDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/categories": {
+			"get": {
+				"operationId": "GetCategories",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ResponsePayload_GetCategoriesResDto-Array_"
 								}
 							}
 						}
@@ -614,12 +1198,22 @@
 							}
 						}
 					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidationErrorPayload"
+								}
+							}
+						}
+					},
 					"409": {
 						"description": "",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/ErrorResponsePayload"
+									"$ref": "#/components/schemas/CommonErrorPayload"
 								}
 							}
 						}
@@ -635,14 +1229,14 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/CreateCategoryDto"
+								"$ref": "#/components/schemas/CreateCategoryReqDto"
 							}
 						}
 					}
 				}
 			}
 		},
-		"/category/second": {
+		"/categories/{firstCategoryId}/second-categories": {
 			"post": {
 				"operationId": "PostSecondCategory",
 				"responses": {
@@ -652,6 +1246,16 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/ResponsePayload_null_"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidationErrorPayload"
 								}
 							}
 						}
@@ -671,13 +1275,147 @@
 					"Category"
 				],
 				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "firstCategoryId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateSecondCategoryReqDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/edu-companies": {
+			"get": {
+				"operationId": "GetEduCompanies",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ResponsePayload_EduCompany-Array_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Education Company"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "PostEduCompany",
+				"responses": {
+					"201": {
+						"description": "CREATED",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ResponsePayload_null_"
+								}
+							}
+						}
+					},
+					"409": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponsePayload"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Education Company"
+				],
+				"security": [],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/CreateSecondCategoryDto"
+								"$ref": "#/components/schemas/CreateEduCompanyDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tags": {
+			"get": {
+				"operationId": "GetTags",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ResponsePayload_Tag-Array_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Tag"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "PostTag",
+				"responses": {
+					"201": {
+						"description": "CREATED",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ResponsePayload_null_"
+								}
+							}
+						}
+					},
+					"409": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponsePayload"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Tag"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateTagDto"
 							}
 						}
 					}
